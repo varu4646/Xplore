@@ -30,7 +30,6 @@ def add_blog(request):
         title = request.POST.get('title')
         description = request.POST.get('description')
         image = request.FILES.get('imageUpload')
-        user = request.user,
         print(title,description,image)
         # Create a new blog entry
         if title and description and image:
@@ -42,8 +41,27 @@ def add_blog(request):
 
     return render(request, 'addblog.html')
 
+def update(request):
+    if request.method == "POST":
+        # Assuming you're receiving data in JSON format
+        firstname = request.POST.get('firstName')
+        lastname = request.POST.get('lastName')
+        name = request.POST.get('username')
+        email = request.POST.get('email')
+        user = request.user
 
+        # Update the fields
+        user.first_name = firstname
+        user.last_name = lastname
+        user.email = email
+        user.username = name
 
+        # Save the changes
+        user.save()
+        messages.info(request, "saved")
+        return redirect('update')
+    else:
+        return redirect('home')
 def logout(request):
     auth.logout(request)
     return render(request, 'login3.html')

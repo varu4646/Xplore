@@ -46,6 +46,11 @@
 
   </head>
   <body>
+   {% for message in messages %}
+        <script type="text/javascript">
+            alert("{{ message }}");  <!-- Display the message in the alert box -->
+        </script>
+    {% endfor %}
    <link type="text/css" href="{% static 'css/home.css' %}" rel="stylesheet">
     <div>
 
